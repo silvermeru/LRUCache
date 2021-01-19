@@ -1,13 +1,13 @@
 # LRUCache
 A simple least recently used cache implemented in python using a doubly-linked list queue with a dictionary.
 
-
+# To run
 To run program from the command line run:
 python -i LRUCache
 
 The LRUCache constructor take an integer to define the number of data blocks to accept before evicting. eg: lru = LRUCache(10)
 
-Commands over the LRUCache:
+# Commands over the LRUCache:
 
 
 put(key, value) - put takes a key and value and places it in the cache and queue. Takes O(1) time.
@@ -18,3 +18,12 @@ dele(key) - removes the associated data block from the cache and removes the key
 
 reset() - clears the cache and Queue. Takes O(1) time since size is constant
 
+
+# Contents
+Main.py - used for local testing. A full battery of testing to come.
+
+Node.py - Contains the Node class used by the Queue class.
+
+Queue.py - My implementation of a Doubly linked list. A doubly linked list was chosen for managing the the Queue becuase it allows for constant time put and get commands. A bitwise implementation could have also been used.
+
+LRUCache.py - My implementation of the LRU cache
