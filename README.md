@@ -27,3 +27,9 @@ Node.py - Contains the Node class used by the Queue class.
 Queue.py - My implementation of a Doubly linked list. A doubly linked list was chosen for managing the the Queue becuase it allows for constant time put and get commands. A bitwise implementation could have also been used.
 
 LRUCache.py - My implementation of the LRU cache
+
+# Goal
+It was my goal with this project to not import any modules provided outside of base python. Everything I needed I designed from scratch. In the future I would extend unit testing with a unitesting framework to ensure better coverage. I used a doubly-linked list as a queue for the high reduction in timing it offers in putting and evicting data blocks into the dictionary.
+
+# Future Goal
+Implement other queuing systems such as using a counter with an addicitonal dictionary or a single linked list. I would like to compare different timings of these different queuing systems to identify which queuing systems optimize which operations the most.
