@@ -4,59 +4,62 @@ import Node
 
 if __name__ == "__main__":
 
+	print("TESTING QUEUE")
 	q = Queue.Queue()
 
+	print("adding nodes 1,2,3")
 	q.addNode(Node.Node("1"))
 	q.addNode(Node.Node("2"))
 	q.addNode(Node.Node("3"))
 
+	print("Using 2")
 	q.useNode("2")
 
-	print(q.getNode("2", q.mru).key)
+	print("get 2: " + q.getNode("2", q.mru).key)
 
-	print("mru: " + q.mru.key)
-	print("lru: " + q.lru.key)
-	print("evicted: " + q.evict())
-	print("lru: " + q.lru.key)
+	print("mru expect 2: " + q.mru.key)
+	print("lru expect 1: " + q.lru.key)
+	print("evicted expect 1: " + q.evict())
+	print("lru expect 3: " + q.lru.key)
 
-
+	print("TESTING LRUCACHE")
 	# Init Cache to size 5
 	lruCache = LRUCache.LRUCache(5)
 	# Fill Cache
-	print("put1")
+	print("put 1 as a")
 	lruCache.put("1","a")
+	print("get 1. Expect a")
 	lruCache.get("1")
-	print("put2")
+	print("put 1 as f")
+	lruCache.put("1","f")
+	print("get 1. Expect f")
+	lruCache.get("1")
+	print("put 2")
 	lruCache.put("2","b")
-	print("put3")
+	print("put 3")
 	lruCache.put("3","c")
-	print("put4")
+	print("put 4")
 	lruCache.put("4","d")
-	print("put5")
+	print("put 5")
 	lruCache.put("5","e")
 
 	# first element should still exist
-	print("Get should return a")
-	lruCache.get("1")
+	print("Get 1 should return a")
 
 	# this should evict element 2
-	print("put6 (evict 2)")
+	lruCache.get("1")
+
+	print("put 6 should evict 2")
 	lruCache.put("6","f")
 
-	print("get2 should not find")
+	print("get 2 should not find because it was evicted")
 	lruCache.get("2")
 
 	print("Delete 6")
 	lruCache.dele("6")
-	print("get 6")
+	print("get 6 should not find because it was evicted")
 	lruCache.get("6")
 	print("reset")
 	lruCache.reset()
-	print("get 1")
+	print("get 1 should not find because everything is empty")
 	lruCache.get("1")
-
-
-
-
-
-
