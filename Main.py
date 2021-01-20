@@ -44,7 +44,7 @@ if __name__ == "__main__":
 	lruCache.put("5","e")
 
 	# first element should still exist
-	print("Get 1 should return a")
+	print("Get 1 should return f")
 
 	# this should evict element 2
 	lruCache.get("1")
