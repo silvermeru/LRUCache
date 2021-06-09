@@ -18,7 +18,6 @@ class LRUCache():
 	# Put the value into the Cache and update the Queue accordingly.
 	# If the cache is full then evict the least resently used data block as managed by the queue
 	def put(self, key, value):
-		print("put: " + key)
 
 		# If the key is already in the cache we do not need to add a new datablock to the cache just update the one that is already there
 		# We must ensure that the usage of the data is reflected in the Queue
