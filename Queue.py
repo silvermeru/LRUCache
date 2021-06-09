@@ -17,8 +17,8 @@ class Queue:
 	def evict(self):
 		key = self.lru.key
 		self.removeNode(self.lru)
-		return key
 
+		return key
 
 	#Add a node to the queue.
 	def addNode(self, node):
@@ -28,67 +28,51 @@ class Queue:
 			self.lru = node
 
 		else:
-			self.mru.next = node
-			node.prev = self.mru
+			self.mru.more = node
+			node.less = self.mru
 			self.mru = node
 
 
 	# Remove a given node from the queue
 	def removeNode(self, node):
 
-		if node.next != None:
-			node.next.prev = node.prev
+		if node.more != None:
+			node.more.less = node.more
 
 		# If the node we are removing is the mru then we must update the mru.
 		if self.mru.key == node.key:
-			self.mru = node.prev
+			self.mru = node.less
 
-		if node.prev != None:
-			node.prev.next = node.next
+		if node.less != None:
+			node.less.more = node.more
 
 		# If the node we are removing is the lru then we must update the lru.	
 		if self.lru.key == node.key:
-			self.lru = node.next
+			self.lru = node.more
 
 		# Ensure references are cleared to prevent memory leaking
-		node.prev = None
-		node.next = None
-
-
-		# Recursively find and get node of linked list by key.
-	def getNode(self, key, node):
-		if node == None:
-			return None
-		if node.key == key :
-			return node
-		else:
-			return self.getNode(key, node.prev)
+		node.less = None
+		node.more = None
 
 
 	# Move the node that contains this key to the mru slot in the in the queue
-	# return false if the node corresponding to the key is not found
-	def useNode(self, key):
-
-		if self.mru == None:
-			return False
-
-		if self.mru.key == key:
+	# This function assumes that the node exists in the list.
+	# A cache miss should always be handled by the caller
+	def useNode(self, node):
+		if self.mru.key == node.key:
 			return True
 
-		usedNode = self.getNode(key, self.mru.prev)
+		noderef = node
 
-		if usedNode == None :
-			return False
-
-		self.removeNode(usedNode)
-		self.addNode(usedNode)
+		self.removeNode(noderef)
+		self.addNode(noderef)
 
 		return True
 
 
 	# empty all nodes from the queue
 	def empty(self):
-		while self.mru != None:
+		while self.mru != None and self.lru != None:
 			self.removeNode(self.mru)
 
 		self.mru = None

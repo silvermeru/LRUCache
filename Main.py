@@ -8,14 +8,17 @@ if __name__ == "__main__":
 	q = Queue.Queue()
 
 	print("adding nodes 1,2,3")
-	q.addNode(Node.Node("1"))
-	q.addNode(Node.Node("2"))
-	q.addNode(Node.Node("3"))
+	nodeA = Node.Node("1", "a")
+	nodeB = Node.Node("2", "b")
+	nodeC = Node.Node("3", "c")
+
+	q.addNode(nodeA)
+	q.addNode(nodeB)
+	q.addNode(nodeC)
 
 	print("Using 2")
-	q.useNode("2")
-
-	print("get 2: " + q.getNode("2", q.mru).key)
+	q.removeNode(nodeB)
+	q.addNode(nodeB)
 
 	print("mru expect 2: " + q.mru.key)
 	print("lru expect 1: " + q.lru.key)
